@@ -37,11 +37,12 @@
       <div class="bs-docs-section">
 
         <div class="row">
+
           <div class="col-lg-12">
             <div class="page-header">
               <h1 id="tables">Devices</h1>
             </div>
-
+            <a href="#" class="btn btn-success">Add Device</a>
             <div class="bs-component">
               <table class="table table-striped table-hover ">
                 <thead>
@@ -63,7 +64,7 @@
                       {{ $var->name }}
                       @endforeach
                     </td>
-                    <td>{{ url('/api/device/update?key=') .$device->token  }}</td>
+                    <td>{{ url('/api/device/update?key=') .'[API Key]&variables'  }}</td>
                   </tr>
                   @endforeach
                   @else

@@ -22,7 +22,7 @@ else {
 	var pieBar = metric;
 	var gaugeTrackColor = '#4f4f4f';
 	var gaugeBarColor = '#898989';
-	var gaugePointerColor = metric;
+	var gaugePointerColor = '#e89640';
 }
 
 // Stores
@@ -721,7 +721,7 @@ function prettyNumber (number) {
 
 // update temp 
 function updatetemp() {
-    $.getJSON("api/device?key=58njBebvyIe3NUcc", 
+    $.getJSON("api/device?key="+temp, 
       function(json){
         $('#temp').text(json.data.temp[0]+'℃'); 
         var temp = $('#temp').next();
@@ -740,11 +740,11 @@ setInterval(updatetemp, 1000);
 
 // update humidity 
 function updatehumidity() {
-    $.getJSON("api/device?key=zwRpMGl6SbRWgLyL", 
+    $.getJSON("api/device?key="+humidity, 
       function(json){
-        $('#humidity').text(json.data.humidity[0]+'%'); 
+        $('#humidity').text(json.data.hum[0]+'%'); 
         var humidity = $('#humidity').next();
-        var change = json.data.humidity[1];
+        var change = json.data.hum[1];
         if(change > 0) {
         	humidity.removeClass("m-green").addClass("m-red");
         	humidity.find('div').removeClass("arrow-down").addClass("arrow-up");
@@ -757,6 +757,34 @@ function updatehumidity() {
 }
 setInterval(updatehumidity, 1000);
 
+// update water level 
+function updatewl() {
+    $.getJSON("api/device?key="+wl, 
+      function(json){
+      	var element = 'svp-1';
+      	cf_rSVPs[element].chart.update(json.data.wl[0]);
+		// Update the data-percent so it redraws on resize properly
+		$('#svp-1 .chart').data('percent', json.data.wl[0]);
+		// Update the UI metric
+		$('.metric-humidity', $('#'+element)).html(json.data.wl[0]);
+
+    });
+}
+setInterval(updatewl, 1000);
+
+// update guage
+function updateg() {
+    $.getJSON("api/device?key="+guage, 
+      function(json){
+      	updateOpts = {'minVal':'0','maxVal':'1000','newVal':json.data.guage[0]};
+		gaugeUpdate('cf-gauge-1', updateOpts);
+
+    });
+}
+setInterval(updateg, 1000);
+
 
 updatetemp();
 updatehumidity();
+updatewl();
+updateg();

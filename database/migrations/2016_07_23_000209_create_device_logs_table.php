@@ -16,7 +16,7 @@ class CreateDeviceLogsTable extends Migration
             $table->increments('id');
             $table->integer('device_variable_id')->unsigned();
             $table->foreign('device_variable_id')->references('id')->on('device_variables');
-            $table->decimal('value', 5, 2);
+            $table->string('value');
             $table->timestamps();
         });
     }

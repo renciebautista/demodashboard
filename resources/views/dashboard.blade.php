@@ -4,12 +4,14 @@
 <head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <title>Sensor Dashboard</title>
+    <title>Demo Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/controlfrog.css" rel="stylesheet" media="screen">   
 	<link href="../../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<script src="token.js"></script> 
 	
 	<script src="../../js/jquery-1.9.1.min.js"></script>    
 	<script src="../../js/moment.js"></script>	
@@ -30,13 +32,19 @@
 		var themeColour = 'black';
 	</script>
 	<style type="text/css">
-		#temp, #humidity {
+		#temp, #humidity, #current, #voltage {
 			font-size: 6.5em;
+		}
+		.metric-humidity {
+			font-size: 6em;
+		}
+		.center {
+			text-align: center;
 		}
 	</style>
     <script src="../../js/controlfrog.js"></script>
 </head>
-<body class="black">
+<body class="white">
 	
 	<div class="cf-container">
 
@@ -63,7 +71,7 @@
 
 			<div class="col-sm-3 cf-item">
 				<header>
-					<p><span></span>Gauge</p>
+					<p><span></span>Tank Pressure</p>
 				</header>
 				<div class="content cf-gauge" id="cf-gauge-1">
 					<div class="val-current">
@@ -78,6 +86,9 @@
 					<div class="val-max">
 						<div class="metric-small">0</div>						
 					</div>
+					<div class="center">
+						<div class="metric-small">PSI</div>						
+					</div>
 				</div>
 			</div> <!-- //end cf-item -->
 
@@ -88,10 +99,10 @@
 				<div class="content">
 					<div class="cf-svmc">
 						<div class="cf-svmc">
-							<div id="temp" class="metric">23℃</div>
+							<div id="temp" class="metric">0℃</div>
 							<div class="change m-green metric-small">
 								<div class="arrow-up"></div>
-								<span>1.45%</span>
+								<span>0%</span>
 							</div>
 						</div>
 						<br>
@@ -113,15 +124,26 @@
 			
 			<div class="col-sm-3 cf-item">
 				<header>
-					<p><span></span>Ambient Temperature</p>
+					<p><span></span>Voltage &amp; Current</p>
 				</header>
 				<div class="content">
 					<div class="cf-svmc">
-						<div class="metric">23℃</div>
-						<div class="change m-red metric-small">
-							<div class="arrow-down"></div>
-							<span class="large">32<span class="small">.45%</span></span>
+						<div class="cf-svmc">
+							<div id="voltage" class="metric">0 V</div>
+							<div class="change m-green metric-small">
+								<div class="arrow-up"></div>
+								<span>0%</span>
+							</div>
 						</div>
+						<br>
+						<div class="cf-svmc">
+							<div id="current" class="metric">0 A</div>
+							<div class="change m-green metric-small">
+								<div class="arrow-up"></div>
+								<span>0%</span>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div> <!-- //end cf-item -->
@@ -157,16 +179,19 @@
 					<p><span></span>Water Level</p>
 				</header>
 				<div class="content cf-svp clearfix" id="svp-1">
-					<div class="chart" data-percent="72" data-layout="l-3"></div>
+					<div id="wl" class="chart" data-percent="0" data-layout="l-3"></div>
 					<div class="metrics">
-						<span class="metric">72</span>
+						<span class="metric-humidity">0</span>
 						<span class="metric-small">%</span>
 					</div>
 				</div>
 			</div> <!-- //end cf-item -->
 		</div> <!-- //end row -->
 
+
+
 	</div> <!-- //end container -->
 
 </body>
+
 </html>

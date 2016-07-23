@@ -22,22 +22,31 @@ class DatabaseSeeder extends Seeder
         $d_var->device()->associate($d_temp);
         $d_var->save();
 
-        $h_temp =  new Device;
-        $h_temp->name = 'Humidity Sensor';
-        $h_temp->token = str_random(16);
-        $h_temp->save();
+        $d_hum =  new Device;
+        $d_hum->name = 'Humidity Sensor';
+        $d_hum->token = str_random(16);
+        $d_hum->save();
 
         $h_var = new DeviceVariable(['name' => 'hum']);
-        $h_var->device()->associate($h_temp);
+        $h_var->device()->associate($d_hum);
         $h_var->save();
 
-        $wl_temp =  new Device;
-        $wl_temp->name = 'Water Level Sensor';
-        $wl_temp->token = str_random(16);
-        $wl_temp->save();
+        $d_wl =  new Device;
+        $d_wl->name = 'Water Level Sensor';
+        $d_wl->token = str_random(16);
+        $d_wl->save();
 
         $wl_var = new DeviceVariable(['name' => 'wl']);
-        $wl_var->device()->associate($wl_temp);
+        $wl_var->device()->associate($d_wl);
+        $wl_var->save();
+
+        $d_guage =  new Device;
+        $d_guage->name = 'Guage Sensor';
+        $d_guage->token = str_random(16);
+        $d_guage->save();
+
+        $wl_var = new DeviceVariable(['name' => 'guage']);
+        $wl_var->device()->associate($d_guage);
         $wl_var->save();
 
     }
